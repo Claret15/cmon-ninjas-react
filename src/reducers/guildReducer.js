@@ -1,12 +1,17 @@
-import { FETCH_GUILDS, FETCH_GUILD } from "../actions/types";
+import { FETCH_GUILD, FETCH_GUILD_MEMBERS } from "../actions/types";
 
-export default (state = [], action) => {
+const INITIAL_STATE = {
+  guild: {},
+  members: []
+};
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_GUILDS:
-      return  action.payload;
-
     case FETCH_GUILD:
-      return action.payload;
+      return { ...state, guild: action.payload };
+
+    case FETCH_GUILD_MEMBERS:
+      return { ...state, members: [...action.payload] };
 
     default:
       return state;

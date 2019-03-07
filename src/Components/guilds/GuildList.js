@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchGuilds } from "../../actions";
 import { Link } from "react-router-dom";
+import { fetchGuilds } from "../../actions";
 
 class GuildList extends Component {
   componentDidMount = () => {
@@ -12,10 +12,8 @@ class GuildList extends Component {
     const { guilds } = this.props;
     return guilds.map(guild => {
       return (
-        <div>
-          <Link to={`/guilds/${guild.id}`} key={guild.id}>
-            {guild.name}
-          </Link>
+        <div key={guild.id}>
+          <Link to={`/guilds/${guild.id}`}>{guild.name}</Link>
         </div>
       );
     });
@@ -25,9 +23,10 @@ class GuildList extends Component {
     return (
       <div className="border border-danger w-50">
         <div className="border border-primary w-75">
-          <h1>guilds </h1>
+          <h1>Guilds </h1>
         </div>
         <div className="border border-warning w-50">
+          <h3>Show Guilds</h3>
           {!this.props.guilds ? "loading" : this.showGuilds()}
         </div>
       </div>
@@ -35,11 +34,9 @@ class GuildList extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-  console.log(ownProps);
+const mapStateToProps = ({ guilds }) => {
   return {
-    guilds: state.guilds
+    guilds: guilds.guilds
   };
 };
 

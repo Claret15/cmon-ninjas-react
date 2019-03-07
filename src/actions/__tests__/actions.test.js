@@ -17,16 +17,11 @@ describe("fetchGuilds", () => {
   });
 });
 
-describe("fetchGuilds", () => {
+describe("fetchGuild", () => {
   it("has the correct type", () => {
-    const action = fetchGuilds();
+    const action = fetchGuild();
     action(() => {
-      expect(action.type).toEqual(FETCH_GUILD);
+      expect(action.type).toEqual(FETCH_GUILDS);
     })
   });
-
-  // it("has the correct payload", () => {
-  //   const action = fetchGuilds([]);
-  //   expect(action.payload).toEqual([]);
-  // });
 });
