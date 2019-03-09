@@ -3,6 +3,7 @@ import {
   FETCH_GUILDS,
   FETCH_GUILD,
   FETCH_GUILD_MEMBERS,
+  FETCH_MEMBER,
   FETCH_MEMBER_EVENT_STAT,
   FETCH_MEMBER_EVENTS
 } from "./types";
@@ -31,11 +32,19 @@ export const fetchGuildMembers = id => async dispatch => {
   });
 };
 
+export const fetchMember = (id) => async dispatch => {
+  const response = await ninjaApi.get(`/members/${id}`);
+  dispatch({
+    type: FETCH_MEMBER,
+    payload: response.data
+  });
+};
+
 export const fetchMemberEventStat = (m_id, e_id) => async dispatch => {
   const response = await ninjaApi.get(`/members/${m_id}/events/${e_id}`);
   dispatch({
     type: FETCH_MEMBER_EVENT_STAT,
-    payload: response.data
+    payload: response.data[0]
   });
 };
 

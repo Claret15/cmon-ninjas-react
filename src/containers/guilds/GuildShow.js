@@ -11,11 +11,11 @@ class GuildShow extends Component {
   };
 
   showGuildMembers() {
-    const { members } = this.props;
-    return members.map(member => {
+    const { guildMembers } = this.props;
+    return guildMembers.map(member => {
       return (
         <div key={member.id}>
-          <Link to={`/members/1/events`}>{member.name}</Link>
+          <Link to={`/members/${member.id}/events`}>{member.name}</Link>
         </div>
       );
     });
@@ -28,13 +28,11 @@ class GuildShow extends Component {
       <div>
         <div className="border border-danger w-75">
           <div className="border border-primary w-75">
-            <h1>Show selected guild</h1>
             <h1>{guild.name}</h1>
           </div>
           <div className="border border-warning w-75">
-            <p>Show cards of guild members</p>
-            <p>Each card can be clicked to view guild member</p>
-            {!this.props.members ? "loading" : this.showGuildMembers()}
+            <h3>Members</h3>
+            {!this.props.guildMembers ? "loading" : this.showGuildMembers()}
           </div>
         </div>
       </div>
@@ -42,10 +40,10 @@ class GuildShow extends Component {
   }
 }
 
-const mapStateToProps = ({ guild }) => {
+const mapStateToProps = ({ guild, guildMembers }) => {
   return {
-    guild: guild.guild,
-    members: guild.members
+    guild,
+    guildMembers
   };
 };
 

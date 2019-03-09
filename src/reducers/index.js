@@ -1,8 +1,17 @@
 import { combineReducers } from "redux";
-import guildReducer from "./guildReducer";
-import guildsReducer from "./guildsReducer";
+import guildMembers from "./guildMembers";
+import guilds from "./guilds";
+import guild from "./guild";
+import member from "./member";
+import memberEvents from "./memberEvents";
+import memberEventStat from "./memberEventStat";
+import events from "./events";
 
 export default combineReducers({
-  guilds: guildsReducer,
-  guild: guildReducer
+  guilds,
+  guild,
+  guildMembers,
+  member,
+  memberEvents,
+  memberEventStat
 });

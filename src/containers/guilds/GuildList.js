@@ -36,7 +36,7 @@ class GuildList extends Component {
 
 const mapStateToProps = ({ guilds }) => {
   return {
-    guilds: guilds.guilds
+    guilds
   };
 };
 

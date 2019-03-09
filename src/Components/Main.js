@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "../Components/home/Home";
+import Home from "./home/Home";
 import Guild from "./Guild";
 import Member from "./Member";
 

@@ -7,7 +7,7 @@ class Member extends Component {
     return (
       <div className="border border-danger w-50">
         <div className="border border-primary w-75">
-          <h1>Member Name </h1>
+          <h1>Claret</h1>
           <h3>Events</h3>
         </div>
         <div className="border border-warning w-50">

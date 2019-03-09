@@ -13,6 +13,7 @@ import {
   FETCH_GUILDS,
   FETCH_GUILD,
   FETCH_GUILD_MEMBERS,
+  FETCH_MEMBERS,
   FETCH_MEMBER_EVENT_STAT,
   FETCH_MEMBER_EVENTS
 } from "../types";
@@ -121,6 +122,32 @@ describe("fetchGuildMembers", () => {
   });
 });
 
+describe("fetchdMember", () => {
+  it("should return correct action type", async done => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: { id: 46, name: "Alpha", guild: "Ninjas", active: true }
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: FETCH_GUILD_MEMBERS,
+        payload: { id: 46, name: "Alpha", guild: "Ninjas", active: true }
+      }
+    ];
+
+    const store = mockStore({});
+
+    await store.dispatch(fetchGuildMembers()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+
 describe("fetchMemberEventStat", () => {
   it("should return correct action type", async done => {
     moxios.wait(() => {
@@ -129,15 +156,15 @@ describe("fetchMemberEventStat", () => {
         status: 200,
         response: [
           {
-            "name": "Bailiff Geoffrey Minra",
-            "event": "The First Dragoon",
-            "event_date": "11-Oct-2018",
-            "position": 24,
-            "guild_pts": 7696376150,
-            "solo_pts": 7696376150,
-            "league": "Kings",
-            "solo_rank": 96,
-            "global_rank": 11115
+            name: "Bailiff Geoffrey Minra",
+            event: "The First Dragoon",
+            event_date: "11-Oct-2018",
+            position: 24,
+            guild_pts: 7696376150,
+            solo_pts: 7696376150,
+            league: "Kings",
+            solo_rank: 96,
+            global_rank: 11115
           }
         ]
       });
@@ -146,19 +173,17 @@ describe("fetchMemberEventStat", () => {
     const expectedActions = [
       {
         type: FETCH_MEMBER_EVENT_STAT,
-        payload: [
-          {
-            "name": "Bailiff Geoffrey Minra",
-            "event": "The First Dragoon",
-            "event_date": "11-Oct-2018",
-            "position": 24,
-            "guild_pts": 7696376150,
-            "solo_pts": 7696376150,
-            "league": "Kings",
-            "solo_rank": 96,
-            "global_rank": 11115
-          }
-        ]
+        payload: {
+          name: "Bailiff Geoffrey Minra",
+          event: "The First Dragoon",
+          event_date: "11-Oct-2018",
+          position: 24,
+          guild_pts: 7696376150,
+          solo_pts: 7696376150,
+          league: "Kings",
+          solo_rank: 96,
+          global_rank: 11115
+        }
       }
     ];
 
