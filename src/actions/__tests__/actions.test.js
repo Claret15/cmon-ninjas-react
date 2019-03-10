@@ -6,16 +6,23 @@ import {
   fetchGuilds,
   fetchGuild,
   fetchGuildMembers,
+  fetchMember,
   fetchMemberEventStat,
-  fetchMemberEvents
+  fetchMemberEvents,
+  fetchEventsList,
+  fetchGuildEventStats,
+  fetchEvent
 } from "../../actions";
 import {
   FETCH_GUILDS,
   FETCH_GUILD,
   FETCH_GUILD_MEMBERS,
-  FETCH_MEMBERS,
+  FETCH_MEMBER,
   FETCH_MEMBER_EVENT_STAT,
-  FETCH_MEMBER_EVENTS
+  FETCH_MEMBER_EVENTS,
+  FETCH_EVENTS_LIST,
+  FETCH_GUILD_EVENT_STATS,
+  FETCH_EVENT
 } from "../types";
 
 const middlewares = [thunk];
@@ -88,41 +95,7 @@ describe("fetchGuild", () => {
   });
 });
 
-describe("fetchGuildMembers", () => {
-  it("should return correct action type", async done => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: [
-          { id: 46, name: "Alpha", guild: "Ninjas", active: true },
-          { id: 101, name: "Bravo", guild: "Ninjas", active: true },
-          { id: 96, name: "Charlie", guild: "Ninjas", active: true }
-        ]
-      });
-    });
-
-    const expectedActions = [
-      {
-        type: FETCH_GUILD_MEMBERS,
-        payload: [
-          { id: 46, name: "Alpha", guild: "Ninjas", active: true },
-          { id: 101, name: "Bravo", guild: "Ninjas", active: true },
-          { id: 96, name: "Charlie", guild: "Ninjas", active: true }
-        ]
-      }
-    ];
-
-    const store = mockStore({});
-
-    await store.dispatch(fetchGuildMembers()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-    done();
-  });
-});
-
-describe("fetchdMember", () => {
+describe("fetchMember", () => {
   it("should return correct action type", async done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
@@ -134,14 +107,14 @@ describe("fetchdMember", () => {
 
     const expectedActions = [
       {
-        type: FETCH_GUILD_MEMBERS,
+        type: FETCH_MEMBER,
         payload: { id: 46, name: "Alpha", guild: "Ninjas", active: true }
       }
     ];
 
     const store = mockStore({});
 
-    await store.dispatch(fetchGuildMembers()).then(() => {
+    await store.dispatch(fetchMember()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
     done();
@@ -248,6 +221,214 @@ describe("fetchMemberEvents", () => {
     const store = mockStore({});
 
     await store.dispatch(fetchMemberEvents()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+
+describe("fetchEventsList", () => {
+  it("should return correct action type", async done => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [
+          {
+            id: 50,
+            name: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_type: "Raid",
+            event_type_id: 1
+          },
+          {
+            id: 49,
+            name: "The Savage Lands",
+            event_date: "07-Feb-2019",
+            event_type: "Crusade",
+            event_type_id: 2
+          }
+        ]
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: FETCH_EVENTS_LIST,
+        payload: [
+          {
+            id: 50,
+            name: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_type: "Raid",
+            event_type_id: 1
+          },
+          {
+            id: 49,
+            name: "The Savage Lands",
+            event_date: "07-Feb-2019",
+            event_type: "Crusade",
+            event_type_id: 2
+          }
+        ]
+      }
+    ];
+
+    const store = mockStore({});
+
+    await store.dispatch(fetchEventsList()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+
+describe("fetchGuildMembers", () => {
+  it("should return correct action type", async done => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [
+          { id: 46, name: "Alpha", guild: "Ninjas", active: true },
+          { id: 101, name: "Bravo", guild: "Ninjas", active: true },
+          { id: 96, name: "Charlie", guild: "Ninjas", active: true }
+        ]
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: FETCH_GUILD_MEMBERS,
+        payload: [
+          { id: 46, name: "Alpha", guild: "Ninjas", active: true },
+          { id: 101, name: "Bravo", guild: "Ninjas", active: true },
+          { id: 96, name: "Charlie", guild: "Ninjas", active: true }
+        ]
+      }
+    ];
+
+    const store = mockStore({});
+
+    await store.dispatch(fetchGuildMembers()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+
+describe("fetchGuildEventStats", () => {
+  it("should return correct action type", async done => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [
+          {
+            event: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_id: 51,
+            global_rank: 62,
+            guild_pts: 11206268516,
+            league: "Legends",
+            name: "King Minotaur",
+            position: 1,
+            solo_pts: 120791391238,
+            solo_rank: 27
+          },
+          {
+            event: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_id: 51,
+            global_rank: 2138,
+            guild_pts: 10635579749,
+            league: "Soldiers",
+            name: "Grand Master Jenn",
+            position: 2,
+            solo_pts: 25105697912,
+            solo_rank: 1
+          }
+        ]
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: FETCH_GUILD_EVENT_STATS,
+        payload: [
+          {
+            event: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_id: 51,
+            global_rank: 62,
+            guild_pts: 11206268516,
+            league: "Legends",
+            name: "King Minotaur",
+            position: 1,
+            solo_pts: 120791391238,
+            solo_rank: 27
+          },
+          {
+            event: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_id: 51,
+            global_rank: 2138,
+            guild_pts: 10635579749,
+            league: "Soldiers",
+            name: "Grand Master Jenn",
+            position: 2,
+            solo_pts: 25105697912,
+            solo_rank: 1
+          }
+        ]
+      }
+    ];
+
+    const store = mockStore({});
+
+    await store.dispatch(fetchGuildEventStats()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+});
+
+describe("fetchEvent", () => {
+  it("should return correct action type", async done => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [
+          {
+            id: 50,
+            name: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_type: "Raid",
+            event_type_id: 1
+          }
+        ]
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: FETCH_EVENT,
+        payload: [
+          {
+            id: 50,
+            name: "Ultimate Power Couple",
+            event_date: "14-Feb-2019",
+            event_type: "Raid",
+            event_type_id: 1
+          }
+        ]
+      }
+    ];
+
+    const store = mockStore({});
+
+    await store.dispatch(fetchEvent()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
     done();

@@ -3,9 +3,12 @@ import {
   FETCH_GUILDS,
   FETCH_GUILD,
   FETCH_GUILD_MEMBERS,
+  FETCH_GUILD_EVENT_STATS,
   FETCH_MEMBER,
   FETCH_MEMBER_EVENT_STAT,
-  FETCH_MEMBER_EVENTS
+  FETCH_MEMBER_EVENTS,
+  FETCH_EVENTS_LIST,
+  FETCH_EVENT
 } from "./types";
 
 export const fetchGuilds = () => async dispatch => {
@@ -32,7 +35,15 @@ export const fetchGuildMembers = id => async dispatch => {
   });
 };
 
-export const fetchMember = (id) => async dispatch => {
+export const fetchGuildEventStats = (g_id, e_id) => async dispatch => {
+  const response = await ninjaApi.get(`/guilds/${g_id}/events/${e_id}`);
+  dispatch({
+    type: FETCH_GUILD_EVENT_STATS,
+    payload: response.data
+  });
+};
+
+export const fetchMember = id => async dispatch => {
   const response = await ninjaApi.get(`/members/${id}`);
   dispatch({
     type: FETCH_MEMBER,
@@ -56,3 +67,18 @@ export const fetchMemberEvents = id => async dispatch => {
   });
 };
 
+export const fetchEventsList = () => async dispatch => {
+  const response = await ninjaApi.get(`/events`);
+  dispatch({
+    type: FETCH_EVENTS_LIST,
+    payload: response.data
+  });
+};
+
+export const fetchEvent = (id) => async dispatch => {
+  const response = await ninjaApi.get(`/events/${id}`);
+  dispatch({
+    type: FETCH_EVENT,
+    payload: response.data
+  });
+};

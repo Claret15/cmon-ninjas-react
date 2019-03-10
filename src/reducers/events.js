@@ -1,20 +1,9 @@
-import {  FETCH_MEMBER_EVENTS} from "../actions/types";
+import { FETCH_EVENTS_LIST } from "../actions/types";
 
-const INITIAL_STATE = [];
-
-// };
-  // events: []
-
-
-
-export default (state = INITIAL_STATE, action) => {
+export default (state = [], action) => {
   switch (action.type) {
-    case  FETCH_MEMBER_EVENTS: 
-    return [...state, ...action.payload];
-
-    // case FETCH_MEMBER_EVENT_STAT:
-    //   return action.payload;
-
+    case FETCH_EVENTS_LIST:
+      return [...action.payload];
     default:
       return state;
   }
