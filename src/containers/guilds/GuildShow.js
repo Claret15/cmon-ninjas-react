@@ -2,38 +2,38 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchGuild, fetchGuildMembers } from "../../actions";
+import styles from "./guildshow.module.scss";
+import Card from "../../Components/card/card";
 
 class GuildShow extends Component {
   componentDidMount = () => {
     const { fetchGuild, fetchGuildMembers, match } = this.props;
-    fetchGuild(match.params.id);
+    if (fetchGuild.length === 0) {
+      fetchGuild(match.params.id);
+    }
     fetchGuildMembers(match.params.id);
   };
 
-  showGuildMembers() {
+  render() {
     const { guildMembers } = this.props;
-    return guildMembers.map(member => {
+    const members = guildMembers.map(member => {
       return (
-        <div key={member.id}>
-          <Link to={`/members/${member.id}/events`}>{member.name}</Link>
-        </div>
+        <Link to={`/members/${member.id}/events`} key={member.id}>
+          <Card>{member.name}</Card>
+        </Link>
       );
     });
-  }
-
-  render() {
-    const { guild } = this.props;
 
     return (
-      <div>
-        <div className="border border-danger w-75">
-          <div className="border border-primary w-75">
-            <h1>{guild.name}</h1>
-          </div>
-          <div className="border border-warning w-75">
-            <h3>Members</h3>
-            {!this.props.guildMembers ? "loading" : this.showGuildMembers()}
-          </div>
+      <div className="container">
+        <div className="text-center">
+          <h1 className="text-center">
+            <i className="fas fa-torii-gate fa-2x" />
+          </h1>
+          <h1 className={styles.heading}>Guild Members</h1>
+        </div>
+        <div className={styles.members_grid}>
+          {!this.props.guildMembers ? "loading" : members}
         </div>
       </div>
     );

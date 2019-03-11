@@ -1,0 +1,11 @@
+.members_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.heading {
+  color: rgba(218, 8, 8, 1);
+}
