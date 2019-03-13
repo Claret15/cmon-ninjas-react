@@ -8,7 +8,9 @@ import {
   FETCH_MEMBER_EVENT_STAT,
   FETCH_MEMBER_EVENTS,
   FETCH_EVENTS_LIST,
-  FETCH_EVENT
+  FETCH_EVENT,
+  CLEAR_MEMBER, 
+  CLEAR_MEMBER_EVENT_STAT 
 } from "./types";
 
 export const fetchGuilds = () => async dispatch => {
@@ -48,6 +50,20 @@ export const fetchMember = id => async dispatch => {
   dispatch({
     type: FETCH_MEMBER,
     payload: response.data
+  });
+};
+
+export const clearMember = () => dispatch => {
+  dispatch({
+    type: CLEAR_MEMBER,
+    payload: {}
+  });
+};
+
+export const clearMemberEventStat = () => dispatch => {
+  dispatch({
+    type: CLEAR_MEMBER_EVENT_STAT,
+    payload: {}
   });
 };
 
