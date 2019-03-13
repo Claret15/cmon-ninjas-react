@@ -1,0 +1,16 @@
+.heading {
+  color: rgba(218, 8, 8, 1);
+}
+
+.events > article > table {
+  max-width: 500px !important;
+  margin: 0 auto;
+
+  th:first-child {
+    min-width: 140px;
+  }
+
+  th:last-child {
+    min-width: 90px;
+  }
+}

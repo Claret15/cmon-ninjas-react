@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchGuild, fetchGuildMembers } from "../../actions";
-import styles from "./guildshow.module.scss";
+import styles from "./GuildShow.module.scss";
 import Card from "../../Components/card/card";
 
 class GuildShow extends Component {
@@ -19,7 +19,11 @@ class GuildShow extends Component {
     const members = guildMembers.map(member => {
       return (
         <Link to={`/members/${member.id}/events`} key={member.id}>
-          <Card>{member.name}</Card>
+          <Card>
+            <strong>
+              {member.name}
+            </strong>
+          </Card>
         </Link>
       );
     });

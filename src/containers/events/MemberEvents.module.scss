@@ -1,0 +1,20 @@
+.heading {
+  color: rgba(218, 8, 8, 1);
+  font-weight: bold;
+}
+ 
+.member_events > article > table {
+  th:first-child {
+    min-width: 175px;
+  }
+
+  th:nth-child(n + 2) {
+    min-width: 100px;
+    text-align: center;
+  }
+
+  td:nth-child(n + 2) {
+    text-align: center;
+  }
+} 
+

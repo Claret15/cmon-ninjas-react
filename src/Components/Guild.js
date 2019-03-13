@@ -1,12 +1,10 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Nav from "./nav/Nav";
-// import GuildList from "../container/guilds/GuildList";
 import GuildList from "../containers/guilds/GuildList";
 import GuildShow from "../containers/guilds/GuildShow";
-import GuildEvents from "./events/GuildEvents";
+import GuildEvents from "../containers/events/GuildEvents";
 import GuildEventStats from "../containers/event-stats/GuildEventStats";
-
 
 const Guild = () => {
   return (
