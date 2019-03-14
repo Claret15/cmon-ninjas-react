@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Table, Header, Body } from "../../Components/table/table";
+import { Table, Header, Body } from "../../Components/table/Table";
 import styles from "./GuildEventStats.module.scss";
 import { fetchGuildEventStats, fetchGuild, fetchEvent } from "../../actions";
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchGuild, fetchGuildMembers } from "../../actions";
-import styles from "./GuildShow.module.scss";
+import styles from "./guildshow.module.scss";
 import Card from "../../Components/card/card";
 
 class GuildShow extends Component {

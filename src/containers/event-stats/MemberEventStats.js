@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Table, Body } from "../../Components/table/table";
+import { Table, Body } from "../../Components/table/Table";
 import styles from "./MemberEventStats.module.scss";
 import { fetchMemberEventStat, clearMemberEventStat } from "../../actions";
 

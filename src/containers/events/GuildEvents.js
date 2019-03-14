@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./GuildEvents.module.scss";
-import { Table, Header, Body } from "../../Components/table/table";
+import { Table, Header, Body } from "../../Components/table/Table";
 import {fetchEventsList, fetchGuild} from "../../actions";
 
 class GuildEvents extends Component {
