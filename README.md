@@ -1,1 +1,1 @@
-React frontend for cmon-ninjas
+React frontend for https://github.com/Claret15/cmon-ninjas
